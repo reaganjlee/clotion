@@ -18,6 +18,7 @@ class EditablePage extends React.Component {
   }
 
   updatePageHandler(updatedBlock) {
+    // Logger.debug("This debug msg is in updatePageHandler")
     const blocks = this.state.blocks;
     const index = blocks.map((b) => b.id).indexOf(updatedBlock.id);
     const updatedBlocks = [...blocks];
@@ -30,6 +31,7 @@ class EditablePage extends React.Component {
   }
 
   addBlockHandler(currentBlock) {
+    // Logger.info("OMG! Check this window out!", window);
     const newBlock = { id: uid, html: "", tag: "p" };
     const blocks = this.state.blocks;
     const index = blocks.map((b) => b.id).indexOf(currentBlock.id);
@@ -55,10 +57,37 @@ class EditablePage extends React.Component {
   }
 
   render() {
+  //   return (
+  //     <div className="Page">
+  //       {this.state.blocks.map((block, key) => {
+  //         return (
+  //           <EditableBlock
+  //             key={key}
+  //             id={block.id}
+  //             tag={block.tag}
+  //             html={block.html}
+  //             updatePage={this.updatePageHandler}
+  //             addBlock={this.addBlockHandler}
+  //             deleteBlock={this.deleteBlockHandler}
+  //           />
+  //         );
+  //       })}
+  //     </div>
+  //   );
+  // }
     return (
       <div className="Page">
         {this.state.blocks.map((block, key) => {
           return (
+            // <EditableBlock
+            //   className="Block"
+            //   innerRef={this.contentEditable}
+            //   html={this.state.html}
+            //   tagName={this.state.tag}
+            //   onChange={this.onChangeHandler}
+            //   onKeyUp={this.onKeyUpHandler}
+            //   onKeyDown={this.onKeyDownHandler}
+            // />
             <EditableBlock
               key={key}
               id={block.id}
@@ -70,7 +99,7 @@ class EditablePage extends React.Component {
             />
           );
         })}
-      </div>
+      </div> 
     );
   }
 }

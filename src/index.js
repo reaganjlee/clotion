@@ -10,6 +10,7 @@ const rootElement = ReactDOM.createRoot(document.getElementById('root'));
 //     <EditablePage />  
 //   </React.StrictMode>
 // );
+// Logger.useDefaults();
 rootElement.render(
   <React.StrictMode>
     <h1 className="Logo">notion.clone</h1>
