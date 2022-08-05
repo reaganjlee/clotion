@@ -94,7 +94,10 @@ class EditableBlock extends React.Component {
     }
     if (e.key === "Enter") {
       // if (this.state.previousKey !== "Shift" && !this.state.selectMenuIsOpen) {
+      console.log("shiftKey: ", e.shiftKey)
+      console.log("selectMenuIsOpen: ", this.state.selectMenuIsOpen)
       if (!e.shiftKey && !this.state.selectMenuIsOpen) {
+        
         e.preventDefault();
         this.props.addBlock({
           id: this.props.id,

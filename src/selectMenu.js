@@ -41,6 +41,7 @@ class SelectMenu extends React.Component {
 
   // Attach a key listener to add any given key to the command
   componentDidMount() {
+    // console.log("Component did mount in ", this);
     document.addEventListener("keydown", this.keyDownHandler);
   }
 
@@ -61,12 +62,29 @@ class SelectMenu extends React.Component {
     const items = this.state.items;
     const selected = this.state.selectedItem;
     const command = this.state.command;
+    console.log("before command is ", command);
+    console.log("before selected is ", selected);
+    console.log("before items is ", items);
+    console.log("The 'e' key is: ", e)
+
+    // items selected doesn't get updated before the first s 
 
     switch (e.key) {
       case "Enter":
-        console.log(e)
-        e.preventDefault();
-        this.props.onSelect(items[selected].tag);
+        // if (items.length > 0) {
+        //   this.props.onSelect(items[selected].tag);
+        // }
+        // if command !== 
+        if (items[selected] === undefined) {
+            // console.log
+            e.preventDefault();
+            this.props.close();
+        } else {
+            e.preventDefault();
+            console.log("items selected: ", items[selected]);
+            console.log("items selected tag: ", items[selected].tag);
+            this.props.onSelect(items[selected].tag);
+        }
         break;
       case "Backspace":
         if (!command) this.props.close();
@@ -84,6 +102,11 @@ class SelectMenu extends React.Component {
         this.setState({ selectedItem: nextSelected });
         break;
       default:
+        console.warn("Items selected: ", items[selected]);
+        if (items[selected] === undefined 
+            && (command.length > 3 || items[selected] === undefined)) {
+            this.props.close();
+        }
         this.setState({ command: this.state.command + e.key });
         break;
     }
