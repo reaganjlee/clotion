@@ -6,7 +6,7 @@ import EditableBlock from "./editableBlock";
 import "./index.css";
 import uid from "./utils/uid"
 
-const initialBlock = { id: uid, html: "", tag: "p" };
+const initialBlock = { id: uid(), html: "", tag: "p" };
 
 class EditablePage extends React.Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class EditablePage extends React.Component {
 
   addBlockHandler(currentBlock) {
     // Logger.info("OMG! Check this window out!", window);
-    const newBlock = { id: uid, html: "", tag: "p" };
+    const newBlock = { id: uid(), html: "", tag: "p" };
     const blocks = this.state.blocks;
     const index = blocks.map((b) => b.id).indexOf(currentBlock.id);
     const updatedBlocks = [...blocks];
