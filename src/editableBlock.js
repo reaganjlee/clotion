@@ -99,6 +99,8 @@ class EditableBlock extends React.Component {
       if (!e.shiftKey && !this.state.selectMenuIsOpen) {
         
         e.preventDefault();
+        console.log("add block this is: ", this);
+        console.log("add block contenteditable is: ", this.contentEditable);
         this.props.addBlock({
           id: this.props.id,
           ref: this.contentEditable.current
@@ -169,6 +171,9 @@ class EditableBlock extends React.Component {
           onKeyDown={this.onKeyDownHandler}
           onKeyUp={this.onKeyUpHandler}
         />
+        {/* <div>
+                <i className="fa fa-bars"></i>
+              </div> */}
       </>
     );
   }

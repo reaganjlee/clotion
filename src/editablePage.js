@@ -1,10 +1,12 @@
 // Imports
-import React from 'react';
+import React from "react";
 // import ReactDOM from 'react-dom/client';
 import EditableBlock from "./editableBlock";
 
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+
 import "./index.css";
-import uid from "./utils/uid"
+import uid from "./utils/uid";
 
 const initialBlock = { id: uid(), html: "", tag: "p" };
 
@@ -25,19 +27,28 @@ class EditablePage extends React.Component {
     updatedBlocks[index] = {
       ...updatedBlocks[index],
       tag: updatedBlock.tag,
-      html: updatedBlock.html
+      html: updatedBlock.html,
     };
     this.setState({ blocks: updatedBlocks });
   }
 
   addBlockHandler(currentBlock) {
     // Logger.info("OMG! Check this window out!", window);
-    const newBlock = { id: uid(), html: "", tag: "p" };
+    console.log("current block is: ", currentBlock);
+    const uid_value = uid();
+    console.warn("uid_value is: ", uid_value);
+    const newBlock = { id: uid_value, key: uid_value, html: "", tag: "p" };
     const blocks = this.state.blocks;
     const index = blocks.map((b) => b.id).indexOf(currentBlock.id);
     const updatedBlocks = [...blocks];
+    console.log("UpdatedBlocks before: ", updatedBlocks);
     updatedBlocks.splice(index + 1, 0, newBlock);
+    console.log("UpdatedBlocks after: ", updatedBlocks);
+    // this.setState
+    console.log("current block is: ", currentBlock);
     this.setState({ blocks: updatedBlocks }, () => {
+      console.log("current block is: ", currentBlock);
+      console.log("updated blocks is: ", updatedBlocks);
       currentBlock.ref.nextElementSibling.focus();
     });
   }
@@ -56,50 +67,38 @@ class EditablePage extends React.Component {
     }
   }
 
+  onDragEnd = (result) => {
+    // const { source, destination } = result;
+  };
+
   render() {
-  //   return (
-  //     <div className="Page">
-  //       {this.state.blocks.map((block, key) => {
-  //         return (
-  //           <EditableBlock
-  //             key={key}
-  //             id={block.id}
-  //             tag={block.tag}
-  //             html={block.html}
-  //             updatePage={this.updatePageHandler}
-  //             addBlock={this.addBlockHandler}
-  //             deleteBlock={this.deleteBlockHandler}
-  //           />
-  //         );
-  //       })}
-  //     </div>
-  //   );
-  // }
     return (
-      <div className="Page">
-        {this.state.blocks.map((block, key) => {
-          return (
-            // <EditableBlock
-            //   className="Block"
-            //   innerRef={this.contentEditable}
-            //   html={this.state.html}
-            //   tagName={this.state.tag}
-            //   onChange={this.onChangeHandler}
-            //   onKeyUp={this.onKeyUpHandler}
-            //   onKeyDown={this.onKeyDownHandler}
-            // />
-            <EditableBlock
-              key={key}
-              id={block.id}
-              tag={block.tag}
-              html={block.html}
-              updatePage={this.updatePageHandler}
-              addBlock={this.addBlockHandler}
-              deleteBlock={this.deleteBlockHandler}
-            />
-          );
-        })}
-      </div> 
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <div className="Page">
+          <Droppable droppableId="hard-coded-droppable-id" type="TASK">
+            {(provided, snapshot) => (
+              <div ref={provided.innerRef} {...provided.droppableProps}>
+                {this.state.blocks.map((block, index) => {
+                  console.log("loading block: ", index, ", ", block);
+                  console.log("block with index ", index, " has id of: ", block.id);
+                  return (
+                    <EditableBlock
+                      key={block.key}
+                      id={block.id}
+                      tag={block.tag}
+                      html={block.html}
+                      updatePage={this.updatePageHandler}
+                      addBlock={this.addBlockHandler}
+                      deleteBlock={this.deleteBlockHandler}
+                    />
+                  );
+                })}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </div>
+      </DragDropContext>
     );
   }
 }
@@ -113,7 +112,5 @@ const setCaretToEnd = (element) => {
   selection.addRange(range);
   element.focus();
 };
-
-
 
 export default EditablePage;
