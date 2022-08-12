@@ -1,6 +1,6 @@
 // Imports
-import React from 'react';
-import ContentEditable from 'react-contenteditable'
+import React from "react";
+import ContentEditable from "react-contenteditable";
 
 // import ReactDOM from 'react-dom/client';
 import "./index.css";
@@ -12,9 +12,10 @@ import SelectMenu from "./selectMenu";
 // import setCaretToEnd  from './utils/caretHelpers';
 // import getCaretCoordinates  from './utils/caretHelpers';
 
-import setCaretToEnd  from './utils/setCaretToEnd';
-import getCaretCoordinates  from './utils/getCaretCoordinates';
+import setCaretToEnd from "./utils/setCaretToEnd";
+import getCaretCoordinates from "./utils/getCaretCoordinates";
 
+import { Draggable } from "react-beautiful-dnd";
 
 const CMD_KEY = "/";
 
@@ -38,8 +39,8 @@ class EditableBlock extends React.Component {
       selectMenuIsOpen: false,
       selectMenuPosition: {
         x: null,
-        y: null
-      }
+        y: null,
+      },
     };
   }
 
@@ -54,7 +55,7 @@ class EditableBlock extends React.Component {
       this.props.updatePage({
         id: this.props.id,
         html: this.state.html,
-        tag: this.state.tag
+        tag: this.state.tag,
       });
     }
   }
@@ -73,12 +74,12 @@ class EditableBlock extends React.Component {
   //         tagName={this.state.tag}
   //         onChange={this.onChangeHandler}
   //       />
-        
+
   //   );
   // }
   onKeyDownHandler(e) {
     if (e.key) {
-      console.log(e.key)
+      console.log(e.key);
     }
     // if (e.key === CMD_KEY) {
     //   // If the user starts to enter a command, we store a backup copy of
@@ -86,7 +87,7 @@ class EditableBlock extends React.Component {
     //   // after the content type selection was finished.
     //   this.setState({ htmlBackup: this.state.html });
     // }
-    
+
     if (e.key === CMD_KEY) {
       // console.log("cmd key pressed, state before: ",this.state.htmlBackup)
       this.setState({ htmlBackup: this.state.html });
@@ -94,25 +95,24 @@ class EditableBlock extends React.Component {
     }
     if (e.key === "Enter") {
       // if (this.state.previousKey !== "Shift" && !this.state.selectMenuIsOpen) {
-      console.log("shiftKey: ", e.shiftKey)
-      console.log("selectMenuIsOpen: ", this.state.selectMenuIsOpen)
+      console.log("shiftKey: ", e.shiftKey);
+      console.log("selectMenuIsOpen: ", this.state.selectMenuIsOpen);
       if (!e.shiftKey && !this.state.selectMenuIsOpen) {
-        
         e.preventDefault();
         // console.log("add block this is: ", this);
         // console.log("add block contenteditable is: ", this.contentEditable);
         this.props.addBlock({
           id: this.props.id,
-          ref: this.contentEditable.current
+          ref: this.contentEditable.current,
         });
       }
     }
-    
+
     if (e.key === "Backspace" && !this.state.html) {
       e.preventDefault();
       this.props.deleteBlock({
         id: this.props.id,
-        ref: this.contentEditable.current
+        ref: this.contentEditable.current,
       });
     }
     // if (!(this.state.previousKey === "Shift" && e.key === "Enter")) {
@@ -131,7 +131,7 @@ class EditableBlock extends React.Component {
     const { x, y } = getCaretCoordinates();
     this.setState({
       selectMenuIsOpen: true,
-      selectMenuPosition: { x, y }
+      selectMenuPosition: { x, y },
     });
     document.addEventListener("click", this.closeSelectMenuHandler);
   }
@@ -140,7 +140,7 @@ class EditableBlock extends React.Component {
     this.setState({
       htmlBackup: null,
       selectMenuIsOpen: false,
-      selectMenuPosition: { x: null, y: null }
+      selectMenuPosition: { x: null, y: null },
     });
     document.removeEventListener("click", this.closeSelectMenuHandler);
   }
@@ -151,10 +151,15 @@ class EditableBlock extends React.Component {
       this.closeSelectMenuHandler();
     });
   }
-  
+
   render() {
+    // console.log("Index is: ", this.props.index);
+    // console.log("This prop id is: ", this.props.id);
     return (
-      <>
+      // Draggable draggableId={this.props.task.id} index={this.props.index}
+      // <Draggable draggableId={this.props.id} index={this.props.index}>
+      
+      <> 
         {this.state.selectMenuIsOpen && (
           <SelectMenu
             position={this.state.selectMenuPosition}
@@ -162,22 +167,27 @@ class EditableBlock extends React.Component {
             close={this.closeSelectMenuHandler}
           />
         )}
-        <ContentEditable
-          className="Block"
-          innerRef={this.contentEditable}
-          html={this.state.html}
-          tagName={this.state.tag}
-          onChange={this.onChangeHandler}
-          onKeyDown={this.onKeyDownHandler}
-          onKeyUp={this.onKeyUpHandler}
-        />
-        {/* <div>
-                <i className="fa fa-bars"></i>
-              </div> */}
+        {/* <div className="flex-box"> */}
+        {/* <div className="together"> */}
+        {/* Currently errors with the div because called nextelementsibling inside inside the div is nothing */}
+          <div>
+            <span className="in-line-class fa fa-bars"></span>
+          </div>
+          <ContentEditable
+            className="Block"
+            innerRef={this.contentEditable}
+            html={this.state.html}
+            tagName={this.state.tag}
+            onChange={this.onChangeHandler}
+            onKeyDown={this.onKeyDownHandler}
+            onKeyUp={this.onKeyUpHandler}
+          />
+        {/* </div> */}
+        {/* </div> */}
       </>
+      // </Draggable>
     );
   }
 }
-  
 
 export default EditableBlock;

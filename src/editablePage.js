@@ -20,7 +20,7 @@ class EditablePage extends React.Component {
   }
 
   updatePageHandler(updatedBlock) {
-    // Logger.debug("This debug msg is in updatePageHandler")
+    console.log("UpdatedBlock looks like: ", updatedBlock);
     const blocks = this.state.blocks;
     const index = blocks.map((b) => b.id).indexOf(updatedBlock.id);
     const updatedBlocks = [...blocks];
@@ -47,8 +47,12 @@ class EditablePage extends React.Component {
     // this.setState
     // console.log("current block is: ", currentBlock);
     this.setState({ blocks: updatedBlocks }, () => {
-      // console.log("current block is: ", currentBlock);
+      console.log("current block is: ", currentBlock);
+      console.log("currentBlock nextElementsibling is: ", currentBlock.ref.nextElementSibling);
+      console.log("currentBlock next next Elementsibling is: ", currentBlock.ref.nextElementSibling.nextElementSibling);
+      
       // console.log("updated blocks is: ", updatedBlocks);
+      // If I have a second div for the button, I can just call nextelementSibling twice
       currentBlock.ref.nextElementSibling.focus();
     });
   }
@@ -87,6 +91,7 @@ class EditablePage extends React.Component {
                       id={block.id}
                       tag={block.tag}
                       html={block.html}
+                      index = {index}
                       updatePage={this.updatePageHandler}
                       addBlock={this.addBlockHandler}
                       deleteBlock={this.deleteBlockHandler}
