@@ -88,9 +88,9 @@ class EditableBlock extends React.Component {
     // }
     
     if (e.key === CMD_KEY) {
-      console.log("cmd key pressed, state before: ",this.state.htmlBackup)
+      // console.log("cmd key pressed, state before: ",this.state.htmlBackup)
       this.setState({ htmlBackup: this.state.html });
-      console.log("cmd key pressed, state after: ", this.state.htmlBackup)
+      // console.log("cmd key pressed, state after: ", this.state.htmlBackup)
     }
     if (e.key === "Enter") {
       // if (this.state.previousKey !== "Shift" && !this.state.selectMenuIsOpen) {
@@ -99,8 +99,8 @@ class EditableBlock extends React.Component {
       if (!e.shiftKey && !this.state.selectMenuIsOpen) {
         
         e.preventDefault();
-        console.log("add block this is: ", this);
-        console.log("add block contenteditable is: ", this.contentEditable);
+        // console.log("add block this is: ", this);
+        // console.log("add block contenteditable is: ", this.contentEditable);
         this.props.addBlock({
           id: this.props.id,
           ref: this.contentEditable.current

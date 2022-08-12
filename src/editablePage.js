@@ -34,21 +34,21 @@ class EditablePage extends React.Component {
 
   addBlockHandler(currentBlock) {
     // Logger.info("OMG! Check this window out!", window);
-    console.log("current block is: ", currentBlock);
+    // console.log("current block is: ", currentBlock);
     const uid_value = uid();
-    console.warn("uid_value is: ", uid_value);
+    // console.warn("uid_value is: ", uid_value);
     const newBlock = { id: uid_value, key: uid_value, html: "", tag: "p" };
     const blocks = this.state.blocks;
     const index = blocks.map((b) => b.id).indexOf(currentBlock.id);
     const updatedBlocks = [...blocks];
-    console.log("UpdatedBlocks before: ", updatedBlocks);
+    // console.log("UpdatedBlocks before: ", updatedBlocks);
     updatedBlocks.splice(index + 1, 0, newBlock);
-    console.log("UpdatedBlocks after: ", updatedBlocks);
+    // console.log("UpdatedBlocks after: ", updatedBlocks);
     // this.setState
-    console.log("current block is: ", currentBlock);
+    // console.log("current block is: ", currentBlock);
     this.setState({ blocks: updatedBlocks }, () => {
-      console.log("current block is: ", currentBlock);
-      console.log("updated blocks is: ", updatedBlocks);
+      // console.log("current block is: ", currentBlock);
+      // console.log("updated blocks is: ", updatedBlocks);
       currentBlock.ref.nextElementSibling.focus();
     });
   }
@@ -79,8 +79,8 @@ class EditablePage extends React.Component {
             {(provided, snapshot) => (
               <div ref={provided.innerRef} {...provided.droppableProps}>
                 {this.state.blocks.map((block, index) => {
-                  console.log("loading block: ", index, ", ", block);
-                  console.log("block with index ", index, " has id of: ", block.id);
+                  // console.log("loading block: ", index, ", ", block);
+                  // console.log("block with index ", index, " has id of: ", block.id);
                   return (
                     <EditableBlock
                       key={block.key}
