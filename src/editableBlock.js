@@ -155,12 +155,14 @@ class EditableBlock extends React.Component {
 
   render() {
     // console.log("Index is: ", this.props.index);
-    // console.log("This prop id is: ", this.props.id);
+    console.log("This prop id is: ", this.props.id);
+    
     return (
       // Draggable draggableId={this.props.task.id} index={this.props.index}
-      // <Draggable draggableId={this.props.id} index={this.props.index}>
-      
-      <> 
+
+      <Draggable draggableId={this.props.id} index={this.props.index}>
+      {(provided, snapshot) => (
+        <>
         {this.state.selectMenuIsOpen && (
           <SelectMenu
             position={this.state.selectMenuPosition}
@@ -168,10 +170,10 @@ class EditableBlock extends React.Component {
             close={this.closeSelectMenuHandler}
           />
         )}
-        <span className="flex-box">
+        <span className="flex-box" {...provided.draggableProps} ref={provided.innerRef}>
         {/* <div className="together"> */}
         {/* Currently errors with the div because called nextelementsibling inside inside the div is nothing */}
-          <div>
+          <div {...provided.dragHandleProps}>
             <i className="fa fa-bars floatingleft"></i>
           </div>
           <ContentEditable
@@ -194,7 +196,9 @@ class EditableBlock extends React.Component {
             </div> */}
         {/* </div> */}
       </>
-      // </Draggable>
+      )}
+      
+      </Draggable>
     );
   }
 }
