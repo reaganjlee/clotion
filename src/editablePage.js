@@ -13,13 +13,13 @@ const initialBlock = { id: uid(), html: "", tag: "p" };
 class EditablePage extends React.Component {
   constructor(props) {
     super(props);
-    this.updatePageHandler = this.updatePageHandler.bind(this);
+    this.updateBlockHandler = this.updateBlockHandler.bind(this);
     this.addBlockHandler = this.addBlockHandler.bind(this);
     this.deleteBlockHandler = this.deleteBlockHandler.bind(this);
     this.state = { blocks: [initialBlock] };
   }
 
-  updatePageHandler(updatedBlock) {
+  updateBlockHandler(updatedBlock) {
     console.log("UpdatedBlock looks like: ", updatedBlock);
     const blocks = this.state.blocks;
     const index = blocks.map((b) => b.id).indexOf(updatedBlock.id);
@@ -92,6 +92,30 @@ class EditablePage extends React.Component {
 
   onDragEnd = (result) => {
     // const { source, destination } = result;
+    const { destination, source, draggableId } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    // const droppableColumn = this.state.columns[source.droppableId];
+    const newBlocks = Array.from(this.state.blocks);
+    console.log("newBlocks is: ", newBlocks);
+
+    const removedBlock = newBlocks.splice(source.index, 1);
+    // If statement just in case
+    if (removedBlock) { 
+      newBlocks.splice(destination.index, 0, removedBlock[0]);
+    }
+    
+    this.setState({ blocks: newBlocks });
   };
 
   render() {
@@ -111,7 +135,7 @@ class EditablePage extends React.Component {
                       tag={block.tag}
                       html={block.html}
                       index = {index}
-                      updatePage={this.updatePageHandler}
+                      updateBlock={this.updateBlockHandler}
                       addBlock={this.addBlockHandler}
                       deleteBlock={this.deleteBlockHandler}
                     />

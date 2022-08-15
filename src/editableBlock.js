@@ -52,7 +52,7 @@ class EditableBlock extends React.Component {
     const htmlChanged = prevState.html !== this.state.html;
     const tagChanged = prevState.tag !== this.state.tag;
     if (htmlChanged || tagChanged) {
-      this.props.updatePage({
+      this.props.updateBlock({
         id: this.props.id,
         html: this.state.html,
         tag: this.state.tag,
@@ -155,7 +155,7 @@ class EditableBlock extends React.Component {
 
   render() {
     // console.log("Index is: ", this.props.index);
-    console.log("This prop id is: ", this.props.id);
+    // console.log("This prop id is: ", this.props.id);
     
     return (
       // Draggable draggableId={this.props.task.id} index={this.props.index}
