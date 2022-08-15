@@ -37,9 +37,11 @@ body {
 .Block {
   /* margin: 0.25rem 0; */
   /* display: inline; */
+  /* original .5 rem */
   padding: 0.5rem;
   background: #fafafa;
   border-radius: 0.25rem;
+  width: 100%;
   
   /* -webkit-user-select: text;
   user-select: text; */
@@ -51,6 +53,14 @@ body {
 .Block:focus {
   background: #f5f6fb;
 }
+
+/* .block-content {
+  width: 80%;
+}
+
+.drag-handle {
+  width: 20%;
+} */
 
 /* SELECT MENU */
 
@@ -106,14 +116,30 @@ body {
 .flex-box {
   display:flex;
   column-gap: 10px; 
+  /* background: orange; */
 
   /* justify-content:space-between; */
   /* outline: 2px dashed blue; */
 }
 
-.in-line-class {
-  display: inline-block;
+/* .inline-block { */
+  /* display: inline-block; */
+  /* width: 40%; */
+  /* white-space: nowrap */
+/* } */
+
+.floatingleft {
+  float: left;
+  padding-top: 25px;
 }
+
+/* .floatingright {
+  float: right;
+} */
+
+/* .halfer {
+  flex: 50%;
+} */
 
 /* .draggable .block {
   display: inline-block;

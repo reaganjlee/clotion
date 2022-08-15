@@ -99,11 +99,12 @@ class EditableBlock extends React.Component {
       console.log("selectMenuIsOpen: ", this.state.selectMenuIsOpen);
       if (!e.shiftKey && !this.state.selectMenuIsOpen) {
         e.preventDefault();
-        // console.log("add block this is: ", this);
-        // console.log("add block contenteditable is: ", this.contentEditable);
+        console.log("add block 'this' is: ", this);
+        console.log("add block 'this.contenteditable' is: ", this.contentEditable);
         this.props.addBlock({
           id: this.props.id,
           ref: this.contentEditable.current,
+          // ref: this,
         });
       }
     }
@@ -167,11 +168,11 @@ class EditableBlock extends React.Component {
             close={this.closeSelectMenuHandler}
           />
         )}
-        {/* <div className="flex-box"> */}
+        <span className="flex-box">
         {/* <div className="together"> */}
         {/* Currently errors with the div because called nextelementsibling inside inside the div is nothing */}
           <div>
-            <span className="in-line-class fa fa-bars"></span>
+            <i className="fa fa-bars floatingleft"></i>
           </div>
           <ContentEditable
             className="Block"
@@ -182,7 +183,15 @@ class EditableBlock extends React.Component {
             onKeyDown={this.onKeyDownHandler}
             onKeyUp={this.onKeyUpHandler}
           />
-        {/* </div> */}
+          {/* <div>what is this </div> */}
+        </span>
+        {/* <div class="flex-box">
+              <div {...provided.dragHandleProps}>
+                <i className="fa fa-bars"></i>
+              </div>
+              <div>{this.props.task.content}</div>
+              
+            </div> */}
         {/* </div> */}
       </>
       // </Draggable>

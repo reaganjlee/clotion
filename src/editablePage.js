@@ -49,11 +49,30 @@ class EditablePage extends React.Component {
     this.setState({ blocks: updatedBlocks }, () => {
       console.log("current block is: ", currentBlock);
       console.log("currentBlock nextElementsibling is: ", currentBlock.ref.nextElementSibling);
-      console.log("currentBlock next next Elementsibling is: ", currentBlock.ref.nextElementSibling.nextElementSibling);
+      console.log("newBlock is: ", newBlock);
+
+      console.warn("currentblock.parents is: ", currentBlock.ref.parentElement);
+      console.warn("currentblock.parent.parent is: ", currentBlock.ref.parentElement.parentElement);
+      console.log("currentblock.parent.nextelementsibling is: ", currentBlock.ref.parentElement.nextElementSibling);
+      // console.log("currentBlock next next Elementsibling is: ", currentBlock.ref.nextElementSibling.nextElementSibling);
       
       // console.log("updated blocks is: ", updatedBlocks);
       // If I have a second div for the button, I can just call nextelementSibling twice
-      currentBlock.ref.nextElementSibling.focus();
+
+      // what gets passed in is the contenteditable which is a editableBlock ref/prop. so instead had to get the 
+      // next item based upon this block itself, can't just pass in the div.
+      //original
+      // currentBlock.ref.nextElementSibling.focus();
+      // others
+
+      // currentBlock.ref.nextElementSibling.contentEditable.current.focus();
+      // newBlock.focus();
+      // const testContainer = document.querySelector('#test');
+      const nextElementSibling = currentBlock.ref.parentElement.nextElementSibling;
+      const textBlockElement = nextElementSibling.querySelector('.Block');
+
+
+      textBlockElement.focus();
     });
   }
 
