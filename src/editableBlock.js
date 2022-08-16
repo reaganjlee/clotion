@@ -173,9 +173,7 @@ class EditableBlock extends React.Component {
         <span className="flex-box" {...provided.draggableProps} ref={provided.innerRef}>
         {/* <div className="together"> */}
         {/* Currently errors with the div because called nextelementsibling inside inside the div is nothing */}
-          <div {...provided.dragHandleProps}>
-            <i className="fa fa-bars floatingleft"></i>
-          </div>
+          
           <ContentEditable
             className="Block"
             innerRef={this.contentEditable}
@@ -185,6 +183,9 @@ class EditableBlock extends React.Component {
             onKeyDown={this.onKeyDownHandler}
             onKeyUp={this.onKeyUpHandler}
           />
+          <div {...provided.dragHandleProps}>
+            <i className="fa fa-bars drag-handle"></i>
+          </div>
           {/* <div>what is this </div> */}
         </span>
         {/* <div class="flex-box">
