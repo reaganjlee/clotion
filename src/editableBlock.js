@@ -17,6 +17,18 @@ import getCaretCoordinates from "./utils/getCaretCoordinates";
 
 import { Draggable } from "react-beautiful-dnd";
 
+import styled from "styled-components";
+
+const TextArea = styled(ContentEditable)`
+  // display: flex;
+  background: ${(props) => (props.isDragging ? "#f8f8f8;" : "white")};
+`;
+
+const DragHandle = styled.div`
+  opacity: ${(props) => (props.isDragging ? "0.4" : "0.4")};
+  // background-color: ${(props) => (props.isDragging ? "lightblue" : "white")};
+`;
+
 const CMD_KEY = "/";
 
 class EditableBlock extends React.Component {
@@ -100,7 +112,10 @@ class EditableBlock extends React.Component {
       if (!e.shiftKey && !this.state.selectMenuIsOpen) {
         e.preventDefault();
         console.log("add block 'this' is: ", this);
-        console.log("add block 'this.contenteditable' is: ", this.contentEditable);
+        console.log(
+          "add block 'this.contenteditable' is: ",
+          this.contentEditable
+        );
         this.props.addBlock({
           id: this.props.id,
           ref: this.contentEditable.current,
@@ -156,49 +171,59 @@ class EditableBlock extends React.Component {
   render() {
     // console.log("Index is: ", this.props.index);
     // console.log("This prop id is: ", this.props.id);
-    
+
     return (
       // Draggable draggableId={this.props.task.id} index={this.props.index}
 
       <Draggable draggableId={this.props.id} index={this.props.index}>
-      {(provided, snapshot) => (
-        <>
-        {this.state.selectMenuIsOpen && (
-          <SelectMenu
-            position={this.state.selectMenuPosition}
-            onSelect={this.tagSelectionHandler}
-            close={this.closeSelectMenuHandler}
-          />
-        )}
-        <span className="flex-box" {...provided.draggableProps} ref={provided.innerRef}>
-        {/* <div className="together"> */}
-        {/* Currently errors with the div because called nextelementsibling inside inside the div is nothing */}
-          
-          <ContentEditable
-            className="Block"
-            innerRef={this.contentEditable}
-            html={this.state.html}
-            tagName={this.state.tag}
-            onChange={this.onChangeHandler}
-            onKeyDown={this.onKeyDownHandler}
-            onKeyUp={this.onKeyUpHandler}
-          />
-          <div {...provided.dragHandleProps}>
-            <i className="fa fa-bars drag-handle"></i>
-          </div>
-          {/* <div>what is this </div> */}
-        </span>
-        {/* <div class="flex-box">
+        {(provided, snapshot) => (
+          <>
+            {this.state.selectMenuIsOpen && (
+              <SelectMenu
+                position={this.state.selectMenuPosition}
+                onSelect={this.tagSelectionHandler}
+                close={this.closeSelectMenuHandler}
+              />
+            )}
+            <span
+              className="flex-box"
+              {...provided.draggableProps}
+              ref={provided.innerRef}
+              isDragging={snapshot.isDragging}
+            >
+              {/* <div className="together"> */}
+              {/* Currently errors with the div because called nextelementsibling inside inside the div is nothing */}
+              {/* <TextArea> */}
+              <TextArea
+                className="Block"
+                innerRef={this.contentEditable}
+                html={this.state.html}
+                tagName={this.state.tag}
+                onChange={this.onChangeHandler}
+                onKeyDown={this.onKeyDownHandler}
+                onKeyUp={this.onKeyUpHandler}
+                isDragging={snapshot.isDragging}
+              />
+              {/* </TextArea> */}
+              <DragHandle {...provided.dragHandleProps} isDragging={snapshot.isDragging}>
+                {/* <i className="fa fa-bars drag-handle"></i> */}
+                {/* <i className="fa-drag-handle drag-handle"></i> */}
+                <i className="fa-solid fa-grip-vertical drag-handle"></i>
+                {/* <FontAwesomeIcon icon="fa-solid fa-grip-vertical" /> */}
+              </DragHandle>
+
+              {/* <div>what is this </div> */}
+            </span>
+            {/* <div class="flex-box">
               <div {...provided.dragHandleProps}>
                 <i className="fa fa-bars"></i>
               </div>
               <div>{this.props.task.content}</div>
               
             </div> */}
-        {/* </div> */}
-      </>
-      )}
-      
+            {/* </div> */}
+          </>
+        )}
       </Draggable>
     );
   }

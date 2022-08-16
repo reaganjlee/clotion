@@ -14,7 +14,7 @@ const rootElement = ReactDOM.createRoot(document.getElementById('root'));
 rootElement.render(
   // <React.StrictMode>
   <>
-  <h1 className="Logo">notion.clone</h1>
+  <h1 className="Logo">reagan's notion clone</h1>
     <p className="Intro">
       Helloo{" "}
       <span role="img" aria-label="greetings" className="Emoji">
@@ -23,7 +23,7 @@ rootElement.render(
       You can add content below. Type <span className="Code">/</span> to see
       available elements.
     </p>
-    <p>Resize the stuff below so the handle is to the side.</p>
+    {/* <p>Resize the stuff below so the handle is to the side.</p> */}
     <EditablePage />
   </>
     

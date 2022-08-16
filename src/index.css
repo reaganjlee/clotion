@@ -1,3 +1,8 @@
+:root {
+  --var: 1rem;
+  --main-background-color: #f8f8f8;
+}
+
 body {
   display: block;
   margin: 0 auto;
@@ -38,20 +43,26 @@ body {
   /* margin: 0.25rem 0; */
   /* display: inline; */
   /* original .5 rem */
-  padding: 0.5rem;
-  background: #fafafa;
+  /* padding: 0.5rem; */
+  padding: 1%;
+  /* background: #fafafa; */
+  /* background: lightblue; */
   border-radius: 0.25rem;
   width: 100%;
+  margin: .05rem;
   
   /* -webkit-user-select: text;
   user-select: text; */
 }
 .Block:hover {
   background: #f8f8f8;
-  outline-color: #f5f6fb;
+  
+  /* outline-color: #f5f6fb; */
+  /* outline-color: pink; */
 }
 .Block:focus {
   background: #f5f6fb;
+  /* background: lightsalmon; */
 }
 
 /* .block-content {
@@ -117,6 +128,12 @@ body {
   display:flex;
   column-gap: 10px; 
   /* background: orange; */
+  padding: 0px;
+  align-content: flex-start
+  /* background: yellow; */
+  /* margin: 0px; */
+  /* height: 2rem; */
+  /* vertical-align: top; */
 
   /* justify-content:space-between; */
   /* outline: 2px dashed blue; */
@@ -128,10 +145,83 @@ body {
   /* white-space: nowrap */
 /* } */
 
-.floatingleft {
+.drag-handle {
   float: left;
-  padding-top: 25px;
+  /* padding-top: 25px; */
+  /* padding-top: 0rem; */
+  padding-top: 0.5rem;
+  margin: auto;
+  /* background: var(--main-background-color); */
+  opacity: 0.0;
+  /* gap: 2rem; */
+  /* padding-left: .2rem; */
+  /* vertical-align: middle; */
+  
+  /* outline-color: #f5f6fb; */
+
+  /* opacity: .5; */
+  transition: opacity .4s ease-out;
+  -moz-transition: opacity .4s ease-out;
+  -webkit-transition: opacity .4s ease-out;
+  -o-transition: opacity .4s ease-out;
 }
+
+.drag-handle:hover:focus {
+  opacity: .4;
+  /* background-color: brown; */
+}
+
+/* .drag-handle:focus { */
+  /* opacity: .4; */
+  /* background: green; */
+/* } */
+
+/* .drag-handle:hover + .block-content { */
+  /* background: #f8f8f8; */
+  /* background: orange; */
+/* } */
+
+
+/* .drag-handle:active { */
+  /* outline: 0; */
+  /* background:orange; */
+/* } */
+
+.flex-box:hover .drag-handle {
+  opacity: .4;
+  /* background: darkmagenta; */
+ 
+}
+.flex-box:hover .Block {
+  /* opacity: .4; */
+
+  background: #f8f8f8;
+ 
+}
+
+/* .flex-box:focus .drag-handle { */
+  /* opacity: 1; */
+  /* background: lightgreen; */
+/* } */
+/* .Block:hover + .drag-handle {
+  opacity: 1;
+  background: green;
+} */
+/* .Block:focus + .drag-handle { */
+  /* opacity: 1; */
+  /* background: blue; */
+/* } */
+/* .Block:hover + .drag-handle { */
+  /* color: #FF3333; */
+/* } */
+/* .drag-handle:hover { */
+  /* background: black; */
+  /* opacity: 1; */
+/* } */
+/* .drag-handle:focus { */
+  /* background: black; */
+  /* opacity: 1; */
+/* } */
 
 /* .floatingright {
   float: right;

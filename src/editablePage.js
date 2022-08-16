@@ -77,7 +77,8 @@ class EditablePage extends React.Component {
   }
 
   deleteBlockHandler(currentBlock) {
-    const previousBlock = currentBlock.ref.previousElementSibling;
+    const previousBlockSibling = currentBlock.ref.parentElement.previousElementSibling;
+    const previousBlock = previousBlockSibling.querySelector('.Block');
     if (previousBlock) {
       const blocks = this.state.blocks;
       const index = blocks.map((b) => b.id).indexOf(currentBlock.id);
