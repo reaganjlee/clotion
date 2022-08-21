@@ -1,3 +1,4 @@
+
 :root {
   --var: 1rem;
   --main-background-color: #f8f8f8;
@@ -13,13 +14,21 @@ body {
 }
 
 .Logo {
-  margin: 2rem 0;
+  /* margin: 2rem 0; */
+  margin: 2rem 0 0 0;
   width: 100%;
   color: #0f2e53;
   font-size: 1.8rem;
   font-weight: 700;
 }
-
+.Header {
+  margin: 0rem 0 1rem 0;
+  width: 100%;
+  color: #0f2e53;
+  opacity: 0.8;
+  font-size: 1rem;
+  font-weight: 700;
+}
 .Intro {
   padding: 0.25rem 1rem 0.25rem 0.5rem;
   margin: 2rem 0;
@@ -102,7 +111,6 @@ body {
   border-radius: 0.5rem;
 }
 
-
 .flex-box {
   display:flex;
   column-gap: 10px; 
@@ -128,6 +136,7 @@ body {
 .flex-box:hover .drag-handle {
   opacity: .4;
 }
+
 .flex-box:hover .Block {
   background: #f8f8f8;
 }

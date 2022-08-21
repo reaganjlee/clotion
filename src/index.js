@@ -4,10 +4,12 @@ import './index.css';
 import EditablePage from './editablePage';
 
 const rootElement = ReactDOM.createRoot(document.getElementById('root'));
+
 rootElement.render(
 
   <>
-  <h1 className="Logo">reagan's notion clone</h1>
+  <h1 className="Logo">clotion</h1>
+  <p className="Header">reagan's notion clone</p>
     <p className="Intro">
       Helloo{" "}
       <span role="img" aria-label="greetings" className="Emoji">
