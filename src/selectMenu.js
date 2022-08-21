@@ -49,7 +49,7 @@ class SelectMenu extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     const command = this.state.command;
     if (prevState.command !== command) {
-      const items = matchSorter(allowedTags, command, { keys: ["tag"] });
+      const items = matchSorter(allowedTags, command, { keys: ["label"] });
       this.setState({ items: items });
     }
   }
