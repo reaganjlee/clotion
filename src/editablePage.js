@@ -93,7 +93,7 @@ class EditablePage extends React.Component {
 
   onDragEnd = (result) => {
     // const { source, destination } = result;
-    const { destination, source, draggableId } = result;
+    const { destination, source } = result;
 
     if (!destination) {
       return;
