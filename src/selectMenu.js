@@ -1,6 +1,3 @@
-// import { defaultBaseSortFn, matchSorter } from "match-sorter";
-// import { Component } from "react";
-// import React from 'react';
 import React from "react";
 import { matchSorter } from "match-sorter";
 
@@ -41,7 +38,6 @@ class SelectMenu extends React.Component {
 
   // Attach a key listener to add any given key to the command
   componentDidMount() {
-    // console.log("Component did mount in ", this);
     document.addEventListener("keydown", this.keyDownHandler);
   }
 
@@ -62,27 +58,15 @@ class SelectMenu extends React.Component {
     const items = this.state.items;
     const selected = this.state.selectedItem;
     const command = this.state.command;
-    console.log("before command is ", command);
-    console.log("before selected is ", selected);
-    console.log("before items is ", items);
-    console.log("The 'e' key is: ", e)
-
-    // items selected doesn't get updated before the first s 
 
     switch (e.key) {
       case "Enter":
-        // if (items.length > 0) {
-        //   this.props.onSelect(items[selected].tag);
-        // }
-        // if command !== 
         if (items[selected] === undefined) {
-            // console.log
             e.preventDefault();
             this.props.close();
         } else {
             e.preventDefault();
-            console.log("items selected: ", items[selected]);
-            console.log("items selected tag: ", items[selected].tag);
+ 
             this.props.onSelect(items[selected].tag);
         }
         break;
@@ -102,7 +86,6 @@ class SelectMenu extends React.Component {
         this.setState({ selectedItem: nextSelected });
         break;
       default:
-        console.warn("Items selected: ", items[selected]);
         if (items[selected] === undefined 
             && (command.length > 3 || items[selected] === undefined)) {
             this.props.close();
@@ -113,7 +96,6 @@ class SelectMenu extends React.Component {
   }
 
   render() {
-    // Define the absolute position before rendering
     const x = this.props.position.x;
     const y = this.props.position.y - MENU_HEIGHT;
     const positionAttributes = { top: y, left: x };

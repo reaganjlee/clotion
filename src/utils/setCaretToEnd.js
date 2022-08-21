@@ -1,5 +1,4 @@
 const setCaretToEnd = (element) => {
-    // export function setCaretToEnd() {
       // Create a new range
       const range = document.createRange();
       // Get the selection object

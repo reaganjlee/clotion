@@ -1,5 +1,4 @@
 const getCaretCoordinates = () => {
-    // export function getCaretCoordinates() {
       let x, y;
       const isSupported = typeof window.getSelection !== "undefined";
       if (isSupported) {
